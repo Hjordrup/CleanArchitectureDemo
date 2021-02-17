@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.example.cleanarchitecturedemo.R;
 
 
-public class MainActivity extends AppCompatActivity {
+public class AndroidView extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

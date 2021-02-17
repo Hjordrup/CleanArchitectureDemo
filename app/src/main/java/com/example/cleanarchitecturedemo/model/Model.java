@@ -3,7 +3,7 @@ package com.example.cleanarchitecturedemo.model;
 
 
 
-public class ModelController {
+public class Model {
 
 
 
