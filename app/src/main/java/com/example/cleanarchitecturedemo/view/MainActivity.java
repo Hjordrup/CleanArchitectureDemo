@@ -1,4 +1,4 @@
-package com.example.cleanarchitecturedemo;
+package com.example.cleanarchitecturedemo.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.cleanarchitecturedemo.R;
 
 
 public class MainActivity extends AppCompatActivity {
