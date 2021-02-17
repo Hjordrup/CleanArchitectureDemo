@@ -10,6 +10,7 @@ import com.example.cleanarchitecturedemo.model.Model;
 
 public class AndroidView extends AppCompatActivity {
 
+
     private Model logic = new Model();
 
 
