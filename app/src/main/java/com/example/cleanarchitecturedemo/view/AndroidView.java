@@ -1,19 +1,15 @@
 package com.example.cleanarchitecturedemo.view;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.example.cleanarchitecturedemo.R;
 
 
 public class AndroidView extends AppCompatActivity {
 
-    private LowerCasePresenter lowerCaseViewModel;
+    private LowerCasePresenter lowerCaseViewModel = new LowerCasePresenter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +20,10 @@ public class AndroidView extends AppCompatActivity {
         observeViewModel();
 
         TextView outputField = findViewById(R.id.textViewScreen);
-        outputField.setText(lowerCaseViewModel.getUserInput().getValue());
+        outputField.setText(lowerCaseViewModel.getUserInput());
     }
+
+
 
     // Method thats gonna be called when the print Button is pressed.
     public void printEditText(View view) {
@@ -34,15 +32,15 @@ public class AndroidView extends AppCompatActivity {
         lowerCaseViewModel.setUserInput(input);
     }
 
-    private void observeViewModel(){
-        lowerCaseViewModel = new LowerCasePresenter();
-        final Observer<String> stringObserver = new Observer<String>() {
+    private void observeViewModel() {
+        lowerCaseViewModel.addLowerCaseObserver(new LowerCasePresenter.LowerCaseObserver() {
             @Override
-            public void onChanged(String s) {
-                TextView outputField = findViewById(R.id.textViewScreen);
-                outputField.setText(s);
+            public void update() {
+                String data = lowerCaseViewModel.getUserInput();
+                TextView outputView = (TextView) findViewById(R.id.textViewScreen);
+                outputView.setText(data);
             }
-        };
-        lowerCaseViewModel.getUserInput().observe(this,stringObserver);
+        });
+
     }
 }

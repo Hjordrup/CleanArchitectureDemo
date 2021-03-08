@@ -1,18 +1,18 @@
 package com.example.cleanarchitecturedemo.view;
 
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-
 import com.example.cleanarchitecturedemo.model.Model;
+import java.util.ArrayList;
 
-public class LowerCasePresenter extends ViewModel {
 
-    private final MutableLiveData<String> userInput = new MutableLiveData<>();
+public class LowerCasePresenter {
+
+    private String userInput;
     private Model logic = new Model();
+    private final ArrayList<LowerCasePresenter.LowerCaseObserver> COLLECTIONOFLOWERCASEOBSERVERS = new ArrayList<>();
 
     public LowerCasePresenter(){
     observeLogic(logic);
-    userInput.setValue(getLowerCaseInput(logic.getData()));
+    userInput = getLowerCaseInput(logic.getData());
     }
 
     private void observeLogic(final Model logic) {
@@ -20,7 +20,8 @@ public class LowerCasePresenter extends ViewModel {
             @Override
             public void update() {
                 String data = logic.getData();
-                userInput.setValue(getLowerCaseInput(data));
+                userInput = getLowerCaseInput(data);
+                notifyObservers();
             }
         });
     }
@@ -33,7 +34,25 @@ public class LowerCasePresenter extends ViewModel {
         logic.setData(userInput);
     }
 
-    public MutableLiveData<String> getUserInput() {
+    public String getUserInput() {
         return userInput;
     }
+
+
+    public interface LowerCaseObserver {
+        void update();
+    }
+
+    private void notifyObservers() {
+        for (LowerCasePresenter.LowerCaseObserver observer : COLLECTIONOFLOWERCASEOBSERVERS) {
+            observer.update();
+        }
+    }
+
+    public void addLowerCaseObserver(LowerCasePresenter.LowerCaseObserver observer) {
+        if (!COLLECTIONOFLOWERCASEOBSERVERS.contains(observer))
+            COLLECTIONOFLOWERCASEOBSERVERS.add(observer);
+    }
+
+
 }
