@@ -13,7 +13,7 @@ import com.example.cleanarchitecturedemo.R;
 
 public class AndroidView extends AppCompatActivity {
 
-    private LowerCaseViewModel lowerCaseViewModel;
+    private LowerCasePresenter lowerCaseViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class AndroidView extends AppCompatActivity {
     }
 
     private void observeViewModel(){
-        lowerCaseViewModel = new LowerCaseViewModel();
+        lowerCaseViewModel = new LowerCasePresenter();
         final Observer<String> stringObserver = new Observer<String>() {
             @Override
             public void onChanged(String s) {

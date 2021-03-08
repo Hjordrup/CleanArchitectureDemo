@@ -5,12 +5,12 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.cleanarchitecturedemo.model.Model;
 
-public class LowerCaseViewModel extends ViewModel {
+public class LowerCasePresenter extends ViewModel {
 
     private final MutableLiveData<String> userInput = new MutableLiveData<>();
     private Model logic = new Model();
 
-    public LowerCaseViewModel(){
+    public LowerCasePresenter(){
     observeLogic(logic);
     userInput.setValue(getLowerCaseInput(logic.getData()));
     }
